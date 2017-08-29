@@ -17,6 +17,8 @@ def main():
         out = subprocess.check_output(
             ["terraform", "apply", "Terraform/"]
         )
+    except subprocess.CalledProcessError, e:
+        print e.output
 
     print out
 
