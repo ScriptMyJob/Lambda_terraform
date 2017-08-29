@@ -10,11 +10,7 @@ import subprocess
 
 def main():
     subprocess.call(
-        [
-            "Resources/terraform",
-            "apply",
-            "Terraform"
-        ]
+        ["Resources/terraform", "apply", "Terraform/"]
     )
 
 
