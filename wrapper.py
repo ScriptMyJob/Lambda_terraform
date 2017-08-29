@@ -9,9 +9,18 @@ import subprocess
 #######################################
 
 def main():
-    subprocess.call(
-        ["Resources/terraform", "apply", "Terraform/"]
-    )
+    try:
+        out = subprocess.check_output(
+            ["Resources/terraform", "apply", "Terraform/"]
+        )
+    except OSError:
+        out = subprocess.check_output(
+            ["terraform", "apply", "Terraform/"]
+        )
+
+    print out
+
+    return out
 
 
 #######################################
