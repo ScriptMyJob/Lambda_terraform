@@ -1,2 +1,3 @@
 /Resources/terraform
 /Lambda_terraform.zip
+/.terraform/*

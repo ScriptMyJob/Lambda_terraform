@@ -3,12 +3,27 @@
 #               Robert@scriptmyjob.com
 
 import subprocess
+import sys
 
 #######################################
 ### Main Function #####################
 #######################################
 
 def main():
+    try:
+        out = subprocess.check_output(
+            ["Resources/terraform", "init", "Terraform/"]
+        )
+    except OSError:
+        out = subprocess.check_output(
+            ["terraform", "init", "Terraform/"]
+        )
+    except subprocess.CalledProcessError, e:
+        print e.output
+        sys.exit()
+
+    print out
+
     try:
         out = subprocess.check_output(
             ["Resources/terraform", "apply", "Terraform/"]
@@ -19,6 +34,7 @@ def main():
         )
     except subprocess.CalledProcessError, e:
         print e.output
+        sys.exit()
 
     print out
 
@@ -34,5 +50,5 @@ if __name__ == "__main__":
 
 
 def execute_me_lambda(event, context):
-    out = main()
-    return out
+    result = main()
+    return result
